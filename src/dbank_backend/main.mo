@@ -3,14 +3,11 @@ import Nat "mo:base/Nat";
 import Time "mo:base/Time";
 
 actor Dbank {
+  stable var currentValue = 300;
 
-  type Time = Int;
   let startTime = Time.now();
 
-  Debug.print(debug_show(startTime));
-
-
-  stable var currentValue = 300;
+  Debug.print(debug_show (startTime));
 
   public func topUp(amount : Nat) {
     currentValue += amount;
