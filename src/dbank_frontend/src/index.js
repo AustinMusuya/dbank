@@ -37,5 +37,6 @@ document.querySelector("form").addEventListener("submit", async (event) => {
     Math.round(currentAmount * 100) / 100;
 
   document.getElementById("input-amount").value = "";
+  document.getElementById("withdrawal-amount").value = "";
   button.removeAttribute("disabled", true);
 });
