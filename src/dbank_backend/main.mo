@@ -5,8 +5,10 @@ import Float "mo:base/Float";
 
 actor Dbank {
   stable var currentValue : Float = 300;
+  // currentValue := 300;
 
   stable var startTime = Time.now();
+  // startTime := Time.now();
 
   Debug.print(debug_show (startTime));
 
@@ -29,14 +31,14 @@ actor Dbank {
     return currentValue;
   };
 
-  public func compound(){
+  public func compound() {
     let currentTime = Time.now();
-    let timeElapsedNs = currentTime -startTime;
+    let timeElapsedNs = currentTime - startTime;
     let timeElapsedS = timeElapsedNs / 1000000000;
 
     // calculate compund interest
     currentValue := currentValue * (1.01 ** Float.fromInt(timeElapsedS));
-    startTime := currentTime; 
+    startTime := currentTime;
 
   };
 };
