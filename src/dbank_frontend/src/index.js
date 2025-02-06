@@ -35,9 +35,9 @@ document.querySelector("form").addEventListener("submit", async (event) => {
     await dbank_backend.subtract(withdraw_amount);
   }
 
-  await dbank_backend.compound();
-
   update(); // funtion to update amount
+
+  await dbank_backend.compound();
 
   document.getElementById("input-amount").value = "";
   document.getElementById("withdrawal-amount").value = "";
