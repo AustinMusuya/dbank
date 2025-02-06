@@ -9,6 +9,8 @@ window.addEventListener("load", async () => {
 });
 
 document.querySelector("form").addEventListener("submit", async (event) => {
+  const button = event.target.querySelector("#submit-btn");
+
   const input_amount = parseFloat(
     document.getElementById("input-amount").value
   );
@@ -17,12 +19,23 @@ document.querySelector("form").addEventListener("submit", async (event) => {
     document.getElementById("withdrawal-amount").value
   );
 
-  await dbank_backend.topUp(input_amount);
+  button.setAttribute("disabled", true);
 
-  await dbank_backend.subtract(withdraw_amount);
+  // topup amount
+  if (document.getElementById("input-amount").value.length != 0) {
+    await dbank_backend.topUp(input_amount);
+  }
+
+  // withdraw amount
+  if (document.getElementById("withdrawal-amount").value.length != 0) {
+    await dbank_backend.subtract(withdraw_amount);
+  }
 
   const currentAmount = await dbank_backend.total();
 
   document.getElementById("value").innerText =
     Math.round(currentAmount * 100) / 100;
+
+  document.getElementById("input-amount").value = "";
+  button.removeAttribute("disabled", true);
 });
