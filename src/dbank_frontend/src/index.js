@@ -1,11 +1,15 @@
 import { dbank_backend } from "../../declarations/dbank_backend";
 
-window.addEventListener("load", async () => {
-  // this.alert("I'm Loaded!");
+const update = async () => {
   const currentAmount = await dbank_backend.total();
 
   document.getElementById("value").innerText =
     Math.round(currentAmount * 100) / 100;
+};
+
+window.addEventListener("load", async () => {
+  // this.alert("I'm Loaded!");
+  update();
 });
 
 document.querySelector("form").addEventListener("submit", async (event) => {
@@ -31,12 +35,12 @@ document.querySelector("form").addEventListener("submit", async (event) => {
     await dbank_backend.subtract(withdraw_amount);
   }
 
-  const currentAmount = await dbank_backend.total();
+  await dbank_backend.compound();
 
-  document.getElementById("value").innerText =
-    Math.round(currentAmount * 100) / 100;
+  update(); // funtion to update amount
 
   document.getElementById("input-amount").value = "";
   document.getElementById("withdrawal-amount").value = "";
+
   button.removeAttribute("disabled", true);
 });
